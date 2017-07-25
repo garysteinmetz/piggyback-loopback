@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "piggyback-loopback": "node piggyback-loopback.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/garysteinmetz/piggyback-loopback/issues"
   },
-  "homepage": "https://github.com/garysteinmetz/piggyback-loopback#readme"
+  "homepage": "https://github.com/garysteinmetz/piggyback-loopback#readme",
+  "devDependencies": {
+    "https": "^1.0.0",
+    "pem": "^1.9.7"
+  }
 }
