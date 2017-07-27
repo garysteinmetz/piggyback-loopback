@@ -14,18 +14,20 @@ var processIncomingRequest = function(req, res) {
   });
   req.on('end', function() {
     var reqOptions= {};
-    reqOptions.hostname = "www.yahoo.com";
+    reqOptions.hostname = "10.10.10.10";
     reqOptions.method = method;
     reqOptions.post = 443;
-    reqOptions.url = url;
+    reqOptions.path = url;
     reqOptions.headers = {};
     reqOptions.rejectUnauthorized = false;
     for (var nextHeader in headers) {
       reqOptions.headers[nextHeader] = headers[nextHeader];
     }
+    //console.log('[' + url + ', METHOD = ' + method + ', BODY_LENGTH = ' + body.length + ']');
     var innerRequest = https.request(
       reqOptions,
       function(innerResponse) {
+        res.statusCode = innerResponse.statusCode;
         //
         for (var nextHeader in innerResponse.headers) {
           //console.log('res = ' + res);
@@ -33,9 +35,11 @@ var processIncomingRequest = function(req, res) {
           //console.log('res.headers = ' + res.headers);
           //console.log('innerResponse.headers = ' + innerResponse.headers);
           //console.log('nextHeader = ' + nextHeader);
+          //console.log('  [' + nextHeader + '] = ' + innerResponse.headers[nextHeader]);
           res.setHeader(nextHeader, innerResponse.headers[nextHeader]);
           //console.log('AfterSetHeader');
         }
+        //console.log('STATUS = ' + innerResponse.statusCode);
         var innerResponseBody = "";
         innerResponse.on('data', function(chunk) {
           innerResponseBody += chunk;
