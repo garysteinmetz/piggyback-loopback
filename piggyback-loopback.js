@@ -35,9 +35,9 @@ var processIncomingRequest = function(req, res) {
   var headers = req.headers;
   var method = req.method;
   var url = req.url;
-  var body = "";
+  var body = [];
   req.on('data', function(chunk) {
-    body += chunk;
+    body.push(chunk);
   });
   req.on('end', function() {
     //console.log('filter = ' + filter);
@@ -70,15 +70,18 @@ var processIncomingRequest = function(req, res) {
             //console.log('AfterSetHeader');
           }
           //console.log('STATUS = ' + innerResponse.statusCode);
-          var innerResponseBody = "";
+          var innerResponseBody = [];
           innerResponse.on('data', function(chunk) {
-            innerResponseBody += chunk;
+            innerResponseBody.push(chunk);
           });
           innerResponse.on('end', function() {
-            res.end(innerResponseBody);
+            //console.log('<RESPONSE_BODY_START>');
+            //console.log(innerResponseBody);
+            res.end(Buffer.concat(innerResponseBody));
+            //console.log('</RESPONSE_BODY_START>');
           });
         });
-      innerRequest.end(body);
+      innerRequest.end(Buffer.concat(body));
     }
     //console.log('body: ' + body);
     //var jsonObj = JSON.parse(body);
