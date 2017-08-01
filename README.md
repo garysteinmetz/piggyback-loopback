@@ -1,7 +1,10 @@
 # piggyback-loopback
 
 sudo npm run piggyback-loopback
+sudo npm run piggyback-loopback TARGET_IP=
+sudo npm run piggyback-loopback TARGET_IP= "OUTPUT_DIR="
 
+(FILTER_FILE too)
 
 How to Use
 1) ping the destination, record the specific IP address
