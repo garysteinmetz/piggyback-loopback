@@ -1,3 +1,14 @@
+var mainEngine = require("./lib/main-engine");
+
+if (true) {
+  console.log("Stopping Program Now");
+  console.log('mainEngine - ' + mainEngine);
+  console.log('mainEngine.start - ' + mainEngine.start);
+  console.log('Object.keys(mainEngine) - ' + Object.keys(mainEngine));
+  mainEngine.start(process.argv);
+  return;
+}
+
 //console.log("What's up?");
 var https = require('https');
 var pem = require('pem');
